@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <f:view>
 	<h:head>
 		<title>Aplicación JavaServer Faces</title>
@@ -11,7 +12,55 @@
 
 	<h:body>
 		<h:form>
-			<h3>¡Pirata, no puedes pasar!.</h3>
+			<h3> Insertar preguntas : en proceso... </h3>
+			<table>
+				<tr>
+					<!-- <td>Fecha (dd/MM/yyyy):</td>
+					<td><h:inputText id="data" value="#{login.fecha}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:inputText></td>-->
+					<!--  <td>Fecha (con PrimeFaces):</td> -->
+					<td>
+					<p>Event Date</p>
+						<!-- <p:calendar id="fecha" value="#{login.fecha}"
+							navigator="true" mode="popup">
+						</p:calendar> --> 
+						<p:calendar id="fecha" value="#{menuBean.fecha}"
+							navigator="false" mode="inline">
+							
+						<p:ajax event="dateSelect" listener="#{menuBean.onDateSelect}"
+								update="mensajes"></p:ajax>
+						</p:calendar>
+					</td>
+					
+					<td>
+					<p>List of events</p>
+					<select name="ListEvents" id="events">
+					<!-- Esto es meramente estetico , HAY QUE BORRARLO -->
+					<option value="prueba">Prueba</option>
+					<option value="prueba1">Prueba1</option>
+					</select>
+					</td>
+				</tr>
+				</table>
+			<table>
+				<tr>
+				<td>Question</td>
+				<td><h:inputText id="question" size ="70"></h:inputText></td>
+				</tr>
+				
+				<tr>
+				<td>Min bet</td>
+				<td><h:inputText id ="minBet" size = "10"></h:inputText></td>
+				</tr>
+				
+				<tr>
+				<td><h:commandButton value="CreateQuestion"/></td>
+				<td><h:commandButton value="Close" action = "menu"/></td>
+				</tr>
+				
+			</table>
+			<h:messages  id="mensajes"  style="color:blue"/>
 		</h:form>
 	</h:body>
 </f:view>
