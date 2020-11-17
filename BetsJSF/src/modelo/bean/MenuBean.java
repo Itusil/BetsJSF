@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 import javax.faces.application.FacesMessage;
@@ -21,7 +22,6 @@ public class MenuBean {
 	private Date fecha;
 	private BLFacade bl= new BLFacadeImplementation();
 	private List<Event> eventos=new ArrayList<Event>();
-
 
 	public MenuBean() {
 	}
@@ -47,9 +47,13 @@ public class MenuBean {
 			eventos.add(jit.next());
 		}
 	}
-	
+
 	public void verPreguntas () {
-		//Event selectedEvent = eventos.getRowData();
+		FacesContext fc = FacesContext.getCurrentInstance();
+		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+		String id =params.get("evento");
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage("Id:"+id));//event.getObject().toString())
 	}
 
 
