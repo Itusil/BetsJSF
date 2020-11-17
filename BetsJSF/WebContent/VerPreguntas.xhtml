@@ -11,8 +11,7 @@
 	</h:head>
 	<h:body>
 		<h:form>
-			<h3>Por favor, introduce tu nombre y tu contraseña (número entre
-				1 y 500)</h3>
+			<h3>Ver preguntas:</h3>
 			<table>
 				<tr>
 					<!-- <td>Fecha (dd/MM/yyyy):</td>
@@ -26,8 +25,25 @@
 						</p:calendar> --> <p:calendar id="fecha" value="#{menuBean.fecha}"
 							navigator="false" mode="inline">
 							<p:ajax event="dateSelect" listener="#{menuBean.onDateSelect}"
-								update="mensajes"></p:ajax>
+								update="tabla"></p:ajax>
 						</p:calendar>
+					</td>
+					<td>
+					<h:dataTable id="tabla" value="#{menuBean.eventos}" var="item" border="1">
+						<f:facet name="header">Eventos:</f:facet>
+						<h:column>
+							<f:facet name="header">Id</f:facet> 
+							#{item.eventNumber}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Descripcion</f:facet>
+							#{item.description}
+						</h:column>	
+						<h:column>
+						<!-- ME HA DICHO QUE VOY BIEN PERO QUE REVISE LA DOCUMENTACIÓN DE LAS DATA TABLES -->
+							<h:commandButton value="Ver preguntas" action="#{menuBean.verPreguntas(#{item.eventNumber})}" immediate="true"/>
+						</h:column>
+					</h:dataTable>
 					</td>
 				</tr>
 			</table>

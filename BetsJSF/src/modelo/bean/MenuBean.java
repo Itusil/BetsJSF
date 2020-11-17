@@ -1,8 +1,11 @@
 package modelo.bean;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Vector;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -10,48 +13,43 @@ import javax.faces.event.AjaxBehaviorEvent;
 
 import org.primefaces.event.SelectEvent;
 
+import businessLogic.BLFacade;
+import businessLogic.BLFacadeImplementation;
+import domain.Event;
+
 public class MenuBean {
-	private String nombre;
-	private String password;
 	private Date fecha;
+	private BLFacade bl= new BLFacadeImplementation();
+	private List<Event> eventos=new ArrayList<Event>();
+
+
 	public MenuBean() {
 	}
 
+	public List<Event> getEventos(){
+		return eventos;
+	}
 	public Date getFecha() {
 		return fecha;
 	}
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}	
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public String comprobar() {
-		if (nombre.length()!=password.length()){
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage("Error: La longitud del nombre y de la contraseña son diferentes."));
-			return null;
-		}
-		if(nombre.equals("pirata")){
-			return "error";
-		}
-		else {
-			return "ok";
-		}
-	}
-
-	public void onDateSelect(SelectEvent event) {
+	public void onDateSelectMostrar(SelectEvent event) {
 		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage("Fecha escogida:"));//+event.getObject()
+				new FacesMessage("Fecha escogida:"+this.getFecha().toString()));//event.getObject().toString())
+	}
+	public void onDateSelect(SelectEvent event) {
+		eventos=new ArrayList<Event>();
+		Vector<Event> j = bl.getEvents(getFecha());
+		Iterator<Event> jit = j.iterator();
+		while (jit.hasNext()) {
+			eventos.add(jit.next());
+		}
+	}
+	
+	public void verPreguntas () {
+		//Event selectedEvent = eventos.getRowData();
 	}
 
 
