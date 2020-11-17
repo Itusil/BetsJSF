@@ -1,4 +1,5 @@
-	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -28,26 +29,31 @@
 								update="tabla"></p:ajax>
 						</p:calendar>
 					</td>
-					<td>
-					<h:dataTable id="tabla" value="#{menuBean.eventos}" var="item" border="1">
-						<f:facet name="header">Eventos:</f:facet>
-						<h:column>
-							<f:facet name="header">Id</f:facet> 
+					<td><h:dataTable id="tabla" value="#{menuBean.eventos}"
+							var="item" border="1">
+							<f:facet name="header">Eventos:</f:facet>
+							<h:column>
+								<f:facet name="header">Id</f:facet> 
 							#{item.eventNumber}
 						</h:column>
-						<h:column>
-							<f:facet name="header">Descripcion</f:facet>
+							<h:column>
+								<f:facet name="header">Descripcion</f:facet>
 							#{item.description}
-						</h:column>	
-						<h:column>
-						<!-- ME HA DICHO QUE VOY BIEN PERO QUE REVISE LA DOCUMENTACIÓN DE LAS DATA TABLES -->
-							<h:commandButton value="Ver preguntas" action="#{menuBean.verPreguntas(#{item.eventNumber})}" immediate="true"/>
 						</h:column>
-					</h:dataTable>
-					</td>
+							<h:column>
+								<!-- ME HA DICHO QUE VOY BIEN PERO QUE REVISE LA DOCUMENTACIÓN DE LAS DATA TABLES -->
+								<f:param name="evento" value="#{item.eventNumber}" />
+
+								<h:commandButton value="Ver preguntas"
+									action="#{menuBean.verPreguntas}" immediate="true"
+									update="mensajes">
+									<f:param name="evento" value="#{item.eventNumber}" />
+								</h:commandButton>
+							</h:column>
+						</h:dataTable></td>
 				</tr>
 			</table>
-			<h:messages  id="mensajes"  style="color:blue"/>
+			<h:messages id="mensajes" style="color:blue" />
 		</h:form>
 	</h:body>
 </f:view>
