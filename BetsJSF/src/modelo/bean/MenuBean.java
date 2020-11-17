@@ -51,7 +51,7 @@ public class MenuBean {
 
 	public void onDateSelect(SelectEvent event) {
 		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage("Fecha escogida: "+event.getObject()));
+				new FacesMessage("Fecha escogida:"));//+event.getObject()
 	}
 
 

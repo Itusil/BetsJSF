@@ -23,14 +23,15 @@
 					<td>
 						<!-- <p:calendar id="fecha" value="#{login.fecha}"
 							navigator="true" mode="popup">
-						</p:calendar> --> <p:calendar id="fecha" value="#{login.fecha}"
+						</p:calendar> --> <p:calendar id="fecha" value="#{menuBean.fecha}"
 							navigator="false" mode="inline">
-							<p:ajax event="dateSelect" listener="#{login.onDateSelect}"
+							<p:ajax event="dateSelect" listener="#{menuBean.onDateSelect}"
 								update="mensajes"></p:ajax>
 						</p:calendar>
 					</td>
 				</tr>
 			</table>
+			<h:messages  id="mensajes"  style="color:blue"/>
 		</h:form>
 	</h:body>
 </f:view>
