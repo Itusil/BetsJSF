@@ -17,15 +17,21 @@ import org.primefaces.event.SelectEvent;
 import businessLogic.BLFacade;
 import businessLogic.BLFacadeImplementation;
 import domain.Event;
+import domain.Question;
 
 public class MenuBean {
 	private Date fecha;
 	private BLFacade bl= new BLFacadeImplementation();
 	private List<Event> eventos=new ArrayList<Event>();
+	private List<Question> preguntas = new ArrayList<Question>();
 
 	public MenuBean() {
 	}
 
+	public List<Question> getPreguntas(){
+		return preguntas;
+	}
+	
 	public List<Event> getEventos(){
 		return eventos;
 	}
@@ -54,6 +60,24 @@ public class MenuBean {
 		String id =params.get("evento");
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage("Id:"+id));//event.getObject().toString())
+	}
+	
+	public void verPreguntas2() {
+		FacesContext fc = FacesContext.getCurrentInstance();
+		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+		String id =params.get("evento");
+		List<Event> etos = getEventos();
+		Event e2 = null;
+		for(Event e: etos) {
+			if(e.getEventNumber().toString().equals(id)) {
+				e2 = e;
+			}
+		}
+		try {
+			preguntas = e2.getQuestions();		
+		}catch(NullPointerException e) {
+			e.printStackTrace();
+		}
 	}
 
 
