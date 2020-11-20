@@ -1,6 +1,5 @@
 package modelo.bean;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -10,7 +9,6 @@ import java.util.Vector;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.event.AjaxBehaviorEvent;
 
 import org.primefaces.event.SelectEvent;
 
@@ -52,6 +50,7 @@ public class MenuBean {
 	}
 
 	private BLFacade bl= new BLFacadeImplementation();
+	private Event evento;
 	private List<Event> eventos=new ArrayList<Event>();
 	private List<Question> preguntas = new ArrayList<Question>();
 
@@ -131,6 +130,14 @@ public class MenuBean {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public Event getEvento() {
+		return evento;
+	}
+
+	public void setEvento(Event evento) {
+		this.evento = evento;
 	}
 
 
