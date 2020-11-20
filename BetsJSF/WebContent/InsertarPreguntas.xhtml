@@ -26,7 +26,6 @@
 					<td>
 					<h:selectOneMenu value = "#{menuBean.evento}" id = "lista" converter="omnifaces.SelectItemsConverter">>
 					<f:selectItems value = "#{menuBean.eventos}"/>
-					<f:ajax event="change" listener="#{menuBean.listener}" render="mensajes"/>
 					</h:selectOneMenu>
 					</td>
 				</tr>
@@ -34,16 +33,17 @@
 			<table>
 				<tr>
 				<td>Question</td>
-				<td><h:inputText id="question" size ="70"></h:inputText></td>
+				<td><h:inputText id="question" size ="70"  value="#{menuBean.preg}"></h:inputText></td>
 				</tr>
 				
 				<tr>
 				<td>Min bet</td>
-				<td><h:inputText id ="minBet" size = "10"></h:inputText></td>
+				<td><h:inputText id ="minBet" size = "10" value="#{menuBean.minbet}"></h:inputText></td>
 				</tr>
 				
 				<tr>
-				<td><h:commandButton value="CreateQuestion" action = "#{menuBean.annadirPregunta}" /></td>
+				<td><h:commandButton value="CreateQuestion" action = "#{menuBean.anadirPregunta}" /></td>
+
 				<td><h:commandButton value="Close" action = "menu"/></td>
 				</tr>
 				
