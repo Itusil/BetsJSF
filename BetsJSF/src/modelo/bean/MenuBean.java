@@ -25,6 +25,9 @@ public class MenuBean {
 	private Event evento;
 	private String preg;
 	private String minbet;
+	private BLFacade bl= new BLFacadeImplementation();
+	private List<Event> eventos=new ArrayList<Event>();
+	private List<Question> preguntas = new ArrayList<Question>();
 	public String getPreg() {
 		return preg;
 	}
@@ -49,10 +52,6 @@ public class MenuBean {
 		this.evento = evento;
 	}
 
-	private BLFacade bl= new BLFacadeImplementation();
-	private Event evento;
-	private List<Event> eventos=new ArrayList<Event>();
-	private List<Question> preguntas = new ArrayList<Question>();
 
 	public MenuBean() {
 	}
@@ -130,14 +129,6 @@ public class MenuBean {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	public Event getEvento() {
-		return evento;
-	}
-
-	public void setEvento(Event evento) {
-		this.evento = evento;
 	}
 
 
