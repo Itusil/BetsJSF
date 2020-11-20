@@ -44,9 +44,9 @@
 								<f:param name="evento" value="#{item.eventNumber}" />
 
 								<h:commandButton value="Ver preguntas"
-									action="#{menuBean.verPreguntas2}" immediate="true"
+									action="#{menuBean.verPreguntas}" immediate="true"
 									update="tabla2">
-									<f:param name="evento" value="#{item.eventNumber}" />
+									<f:setPropertyActionListener target="#{menuBean.idEvento}" value="#{item.eventNumber}" />
 								</h:commandButton>
 							</h:column>
 						</h:dataTable></td>

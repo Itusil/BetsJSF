@@ -18,9 +18,39 @@ import businessLogic.BLFacade;
 import businessLogic.BLFacadeImplementation;
 import domain.Event;
 import domain.Question;
+import exceptions.EventFinished;
+import exceptions.QuestionAlreadyExist;
 
 public class MenuBean {
 	private Date fecha;
+	private Integer idEvento;
+	private Event evento;
+	private String preg;
+	private String minbet;
+	public String getPreg() {
+		return preg;
+	}
+
+	public void setPreg(String preg) {
+		this.preg = preg;
+	}
+
+	public String getMinbet() {
+		return minbet;
+	}
+
+	public void setMinbet(String minbet) {
+		this.minbet = minbet;
+	}
+
+	public Event getEvento() {
+		return evento;
+	}
+
+	public void setEvento(Event evento) {
+		this.evento = evento;
+	}
+
 	private BLFacade bl= new BLFacadeImplementation();
 	private List<Event> eventos=new ArrayList<Event>();
 	private List<Question> preguntas = new ArrayList<Question>();
@@ -41,6 +71,15 @@ public class MenuBean {
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}	
+
+	public Integer getIdEvento() {
+		return idEvento;
+	}
+
+	public void setIdEvento(Integer idEvento) {
+		this.idEvento = idEvento;
+	}
+
 	public void onDateSelectMostrar(SelectEvent event) {
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage("Fecha escogida:"+this.getFecha().toString()));//event.getObject().toString())
@@ -54,28 +93,42 @@ public class MenuBean {
 		}
 	}
 
-	public void verPreguntas () {
-		FacesContext fc = FacesContext.getCurrentInstance();
-		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
-		String id =params.get("evento");
+	public void printPreguntas () {
+		int id_ = getIdEvento();
 		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage("Id:"+id));//event.getObject().toString())
+				new FacesMessage("Id:"+id_));//event.getObject().toString())
 	}
 	
-	public void verPreguntas2() {
-		FacesContext fc = FacesContext.getCurrentInstance();
-		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
-		String id =params.get("evento");
+	public void obtenerEventosFecha() {
+		this.eventos = bl.getEvents(fecha);
+	}
+	
+	public void verPreguntas() {
+		Integer id_ = getIdEvento();
+		System.out.println("id: "+ id_);
 		List<Event> etos = getEventos();
 		Event e2 = null;
 		for(Event e: etos) {
-			if(e.getEventNumber().toString().equals(id)) {
+			if(e.getEventNumber()== id_) {
 				e2 = e;
 			}
 		}
 		try {
 			preguntas = e2.getQuestions();		
 		}catch(NullPointerException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void anadirPregunta() {
+		float minimo = Float.parseFloat(getMinbet());
+		try {
+			bl.createQuestion(evento, preg, minimo);
+		} catch (EventFinished e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (QuestionAlreadyExist e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
