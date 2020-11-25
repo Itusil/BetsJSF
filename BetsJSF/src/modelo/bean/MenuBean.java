@@ -122,12 +122,26 @@ public class MenuBean {
 		float minimo = Float.parseFloat(getMinbet());
 		try {
 			bl.createQuestion(evento, preg, minimo);
+			this.refrescarEventos();
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("Pregunta añadida correctamente"));
 		} catch (EventFinished e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage("ok",
+					new FacesMessage("ERROR: El evento ya ha finalizado"));
 		} catch (QuestionAlreadyExist e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage("error",new FacesMessage("ERROR: El evento ya ha finalizado"));
+		}
+	}
+	
+	public void refrescarEventos() {
+		eventos=new ArrayList<Event>();
+		Vector<Event> j = bl.getEvents(getFecha());
+		Iterator<Event> jit = j.iterator();
+		while (jit.hasNext()) {
+			eventos.add(jit.next());
 		}
 	}
 
