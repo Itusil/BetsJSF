@@ -10,20 +10,16 @@
 <f:view>
 	<h:head>
 		<title>Aplicación JavaServer Faces</title>
+		<h:outputStylesheet library="css" name="estilos.css" />
 	</h:head>
 	<h:body>
 		<h:form>
-			<h3>Ver preguntas:</h3>
-			<table>
+			<h3 class="titulo">Ver preguntas</h3>
+			<table class="centrado">
 				<tr>
-					<!-- <td>Fecha (dd/MM/yyyy):</td>
-					<td><h:inputText id="data" value="#{login.fecha}">
-							<f:convertDateTime pattern="dd/MM/yyyy" />
-						</h:inputText></td>-->
-					<td>
-						<!-- <p:calendar id="fecha" value="#{login.fecha}"
-							navigator="true" mode="popup">
-						</p:calendar> --> <p:calendar id="fecha" value="#{menuBean.fecha}"
+					<td class="recuadroRojo"><text class="encabezado">Fecha:</text>
+					<br></br>
+					 <p:calendar id="fecha" value="#{menuBean.fecha}"
 							navigator="false" mode="inline">
 							<p:ajax event="dateSelect" listener="#{menuBean.onDateSelect}"
 								update="tabla"></p:ajax>
@@ -40,7 +36,6 @@
 								#{item.description}
 							</h:column>
 							<h:column>
-								<!-- ME HA DICHO QUE VOY BIEN PERO QUE REVISE LA DOCUMENTACIÓN DE LAS DATA TABLES -->
 								<f:param name="evento" value="#{item.eventNumber}" />
 
 								<h:commandButton value="Ver preguntas"
@@ -51,25 +46,21 @@
 							</h:column>
 						</h:dataTable></td>
 				</tr>
-			</table>
-			<h:messages id="mensajes" style="color:blue" />
-			<table>
 				<tr>
-					<h3>Preguntas del evento:</h3>
-				</tr>
-				<tr>
-					<h:dataTable id="tabla2" value="#{menuBean.preguntas}" var="item2" border="1">
+				<td style="border:1px solid red">Te gustaría insertar una pregunta? haz click <a href="InsertarPreguntas.xhtml">aquí</a></td>
+				<td><h:dataTable id="tabla2" value="#{menuBean.preguntas}" var="item2" border="1">
 						<h:column>
-							<f:facet name="header">#Pregunta</f:facet> 
+							<f:facet name="header">Id pregunta</f:facet> 
 							#{item2.questionNumber}
 						</h:column>	
 						<h:column>
 							<f:facet name="header">Pregunta</f:facet> 
 							#{item2.question}
 						</h:column>			
-					</h:dataTable>
+					</h:dataTable></td>
 				</tr>
 			</table>
+			<h:messages id="mensajes" style="color:blue" />
 		</h:form>
 	</h:body>
 </f:view>

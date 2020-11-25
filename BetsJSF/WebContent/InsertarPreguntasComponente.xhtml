@@ -9,12 +9,13 @@
 <f:view>
 	<h:head>
 		<title>Aplicación JavaServer Faces</title>
+		<h:outputStylesheet library="css" name="estilos.css" />
 	</h:head>
 
 	<h:body>
 		<h:form>
-			<h3> Insertar preguntas : en proceso... </h3>
-			<table>
+			<h3 class="titulo">Insertar preguntas</h3>
+			<table class="centrado">
 				<tr>
 					<td>
 						<p:calendar id="fecha" value="#{menuBean.fecha}"
@@ -23,32 +24,38 @@
 								update="lista"></p:ajax>
 						</p:calendar>
 					</td>
+				</tr>
+				<tr>
 					<td>
-					<h:selectOneMenu value = "#{menuBean.evento}" id = "lista" converter="omnifaces.SelectItemsConverter">
+					<text>Seleccione evento:</text>
+					<h:selectOneMenu value = "#{menuBean.evento}" id = "lista" converter="omnifaces.SelectItemsConverter">>
 					<f:selectItems value = "#{menuBean.eventos}"/>
 					</h:selectOneMenu>
 					</td>
 				</tr>
-				</table>
-			<table>
 				<tr>
-				<td>Question</td>
-				<td><h:inputText id="question" size ="70"  value="#{menuBean.preg}"></h:inputText></td>
+				<td>
+				<text>Pregunta:   </text><h:inputText id="question" size ="35"  value="#{menuBean.preg}">
+					 <f:validateRegex pattern="[a-zóáéíú?¿ A-ZÁÉÍÓÚ]{2,}$"/>
+				</h:inputText></td>
 				</tr>
-				
 				<tr>
-				<td>Min bet</td>
-				<td><h:inputText id ="minBet" size = "10" value="#{menuBean.minbet}"></h:inputText></td>
+				<td><text>Apuesta minima (formato con dos decimales ej: 1.25):  </text>
+				<h:inputText id ="minBet" size = "10" value="#{menuBean.minbet}">
+					<f:validateRegex pattern="[0-9]+[.]{1}[0-9]{2}$"/>
+				</h:inputText></td>
+				
 				</tr>
-				
 				<tr>
-				<td><h:commandButton value="CreateQuestion" action = "#{menuBean.anadirPregunta}" /></td>
-
-				<td><h:commandButton value="Close" action = "menu"/></td>
+				<td style="text-align:center"><h:commandButton id="CreateQuestion" value="Crear la pregunta" action = "#{menuBean.anadirPregunta}" />
+				<h:commandButton value="Atrás" action = "menu"/></td>
+				</tr>
+				<tr>
 				</tr>
 				
 			</table>
-			<h:messages  id="mensajes"  style="color:blue"/>
+			<h:messages id="error" style="color:red; font-weight:bold;"/>
+			
 		</h:form>
 	</h:body>
 </f:view>
