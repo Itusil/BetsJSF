@@ -132,7 +132,7 @@ public class MenuBean {
 		} catch (QuestionAlreadyExist e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			FacesContext.getCurrentInstance().addMessage("error",new FacesMessage("ERROR: El evento ya ha finalizado"));
+			FacesContext.getCurrentInstance().addMessage("error",new FacesMessage("ERROR: Existe una pregunta con la misma descripcion"));
 		}
 	}
 	
